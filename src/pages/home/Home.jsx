@@ -1,7 +1,11 @@
+import Banner from "./Banner";
+import AllFoodsContainer from "./AllFoodsContainer";
+
 const Home = () => {
   return (
     <div>
-      This is home   
+      <Banner></Banner> 
+      <AllFoodsContainer></AllFoodsContainer>  
     </div>
   );
 };
