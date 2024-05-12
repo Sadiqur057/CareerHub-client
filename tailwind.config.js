@@ -11,8 +11,8 @@ module.exports = withMT({
       colors: {
         transparent: 'transparent',
         'c-black': '#242c36',
-        'c-primary': '#35a483',
-        'c-hover':'#1a9a82',
+        'c-primary': '#e0882f',
+        'c-hover':'#e08224',
         'c-input':'#ebf6f28c',
       },
     },
