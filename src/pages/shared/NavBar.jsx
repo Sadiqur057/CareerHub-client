@@ -44,9 +44,9 @@ export function NavBar() {
 
   
   const activeStyles =
-    "lg:border-b transition duration-300 ease-in-out px-3 border-c-primary font-bold hover:bg-c-primary hover:text-[#fff] text-[15px] my-2 lg:my-0 mx-0 hover:rounded py-2";
+    "lg:border-y transition duration-300 ease-in-out px-3 border-c-primary font-bold hover:bg-c-primary hover:text-[#fff] text-[15px] my-2 lg:my-0 mx-0 hover:rounded py-2";
   const inactiveStyles =
-    "px-3  font-medium border-y border-transparent   mx-1  hover:font-black-800 rounded hover:bg-base-200  text-[15px] my-2 lg:my-0 mx-0 py-2";
+    "px-1  font-medium border-y border-transparent   mx-1  hover:font-black-800 rounded hover:bg-base-200  text-[15px] my-2 lg:my-0 mx-0 py-2";
 
   const links = (
     <>
@@ -57,45 +57,37 @@ export function NavBar() {
         Home
       </NavLink>
       <NavLink
-        to="/tourist-spots"
+        to="/all-foods"
         className={({ isActive }) => (isActive ? activeStyles : inactiveStyles)}
       >
-        All Jobs
+        Available Foods
       </NavLink>
 
       {user && (
         <>
           <NavLink
-            to="/add-tourist-spot"
+            to="/add-food"
             className={({ isActive }) =>
               isActive ? activeStyles : inactiveStyles
             }
           >
-            Applied Jobs
+            Add Food
           </NavLink>
           <NavLink
-            to="/my-tourist-spot"
+            to="/my-foods"
             className={({ isActive }) =>
               isActive ? activeStyles : inactiveStyles
             }
           >
-            Add A Job
+            Manage My Foods
           </NavLink>
           <NavLink
-            to="/my-tourist-spot"
+            to="/requested-foods"
             className={({ isActive }) =>
               isActive ? activeStyles : inactiveStyles
             }
           >
-            My Jobs
-          </NavLink>
-          <NavLink
-            to="/my-tourist-spot"
-            className={({ isActive }) =>
-              isActive ? activeStyles : inactiveStyles
-            }
-          >
-            Blogs
+            My Food Request
           </NavLink>
         </>
       )}
@@ -110,21 +102,21 @@ export function NavBar() {
   }, []);
 
   const navList = (
-    <ul className="mt-2 mb-4 flex flex-col lg:gap-4 lg:mb-0 lg:mt-0 lg:flex-row lg:items-center">
+    <ul className="mt-2 mb-4 flex flex-col lg:gap-3 lg:mb-0 lg:mt-0 lg:flex-row lg:items-center">
       {links}
     </ul>
   );
 
   const darkNav =
-    "sticky top-0 z-10 h-max max-w-full rounded-none px-4 lg:px-8 l bg-neutral text-white border-none";
+    "sticky top-0 z-10 h-max max-w-full rounded-none px-4 lg:px-0 l bg-neutral text-white border-none";
   const lightNav =
-    "sticky top-0 z-10 h-max max-w-full rounded-none px-4 lg:px-8   text-c-black";
+    "sticky top-0 z-10 h-max max-w-full rounded-none px-4 lg:px-0   text-c-black";
   return (
     <div className="max-h-[768px] w-full overflow-hidden border-0 outline-none">
       <Navbar className={theme === "light" ? lightNav : darkNav}>
         <div className="flex items-center justify-between h-[40px] md:h-[50px]">
           <Typography className="text-c-primary mr-4 cursor-pointer font-bold text-[28px] md:text-3xl ">
-            <Link to="/">CareerHub</Link>
+            <Link to="/">FoodShare</Link>
           </Typography>
           <div className="flex items-center gap-4">
             <div className="mr-4 hidden lg:block">{navList}</div>
