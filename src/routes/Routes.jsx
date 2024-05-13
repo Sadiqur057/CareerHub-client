@@ -4,21 +4,20 @@ import Home from "../pages/home/Home";
 import ErrorPage from "../pages/errorPage/ErrorPage";
 import Register from "../pages/register/Register";
 import Login from "../pages/login/Login";
-import FoodDetails from "../pages/foodDetails/foodDetails";
-
-import AddFood from "../pages/addFood/AddFood";
-import MyFoods from "../pages/myFoods/MyFoods";
-import AllFoods from "../pages/allFoods/AllFoods";
-import EditFood from "../pages/editFood/EditFood";
-import RequestedFoods from "../pages/requestedFoods/RequestedFoods";
-import PrivateRoutes from "./PrivateRoutes";
+import JobDetails from "../pages/jobDetails/JobDetails";
+import AllJobs from "../pages/allJobs/AllJobs";
+import AddJob from "../pages/addJob/AddJob";
+import MyJobs from "../pages/myJobs/MyJobs";
+import EditJob from "../pages/editJob/EditJob";
+import PrivateRoutes from "../routes/PrivateRoutes"
+import AppliedJobs from "../pages/appliedJobs/AppliedJobs";
 
 
 const Routes = createBrowserRouter([
   {
     path: "/",
     element: <Root></Root>,
-    errorElement: <ErrorPage></ErrorPage>,
+    errorElement:<ErrorPage></ErrorPage>,
     children: [
       {
         path: "/",
@@ -33,28 +32,28 @@ const Routes = createBrowserRouter([
         element: <Register></Register>,
       },
       {
-        path: "/food-details/:id",
-        element: <PrivateRoutes><FoodDetails></FoodDetails></PrivateRoutes>,
+        path: "/job-details/:id",
+        element:  <PrivateRoutes> <JobDetails></JobDetails></PrivateRoutes>,
       },
       {
-        path: "/edit-food/:id",
-        element: <PrivateRoutes><EditFood></EditFood></PrivateRoutes>,
+        path: "/all-jobs",
+        element: <AllJobs></AllJobs>,
       },
       {
-        path: "/all-foods",
-        element: <AllFoods></AllFoods>,
+        path: "/add-job",
+        element:<PrivateRoutes><AddJob></AddJob></PrivateRoutes>
       },
       {
-        path: "/add-food",
-        element: <PrivateRoutes><AddFood></AddFood></PrivateRoutes>
+        path: "/my-jobs",
+        element:<PrivateRoutes><MyJobs></MyJobs></PrivateRoutes>
       },
       {
-        path: "/my-foods",
-        element: <PrivateRoutes><MyFoods></MyFoods></PrivateRoutes>
+        path: "/applied-jobs",
+        element:<PrivateRoutes><AppliedJobs></AppliedJobs></PrivateRoutes>
       },
       {
-        path: "/requested-foods",
-        element: <PrivateRoutes><RequestedFoods></RequestedFoods></PrivateRoutes>
+        path: "/edit-job/:id",
+        element:<PrivateRoutes><EditJob></EditJob></PrivateRoutes>
       },
     ],
   },
