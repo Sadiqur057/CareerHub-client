@@ -1,11 +1,13 @@
 import Banner from "./Banner";
-import AllFoodsContainer from "./AllFoodsContainer";
+import JobByCategory from "./JobByCategory";
+import MyComponent from "./test";
 
 const Home = () => {
   return (
     <div>
       <Banner></Banner> 
-      <AllFoodsContainer></AllFoodsContainer>  
+      <JobByCategory></JobByCategory>
+      {/* <MyComponent></MyComponent>   */}
     </div>
   );
 };
