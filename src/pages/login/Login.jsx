@@ -11,10 +11,9 @@ import { Input } from "@material-tailwind/react";
 
 const Login = () => {
   // scroll to top on load
-  const onLoad = () => {
+
     window.scrollTo(0, 0);
-  };
-  onLoad();
+
 
   const navigate = useNavigate();
   const location = useLocation();
@@ -33,26 +32,11 @@ const Login = () => {
     formState: { errors },
   } = useForm();
 
-  // social login
   const handleGoogleLogin = () => {
     googleLogin()
       .then(() => {
-        // const user = userCredential.user;
-        // const name = user.displayName;
-        // const email = user.email;
-        // const photo = user.photoURL;
-        // const userDetails = { name, email, photo };
         setReload(true)
         toast.success("Login Success");
-        // fetch("https://travelors-server.vercel.app/users", {
-        //   method: "POST",
-        //   headers: {
-        //     "content-type": "application/json",
-        //   },
-        //   body: JSON.stringify(userDetails),
-        // })
-        //   .then()
-        //   .then();
         navigate(location?.state ? location.state : "/");
 
       })
@@ -64,22 +48,9 @@ const Login = () => {
   const handleGithubLogin = () => {
     githubLogin()
       .then(() => {
-        // const user = userCredential.user;
-        // const name = user.displayName;
-        // const email = user.email || "Not Found";
-        // const photo = user.photoURL;
-        // const userDetails = { name, email, photo };
         toast.success("Login Success");
         setReload(true)
-        // fetch("https://travelors-server.vercel.app/users", {
-        //   method: "POST",
-        //   headers: {
-        //     "content-type": "application/json",
-        //   },
-        //   body: JSON.stringify(userDetails),
-        // })
-        //   .then()
-        //   .then();
+
         toast.success("Login Success");
         navigate(location?.state ? location.state : "/");
       })
@@ -111,7 +82,7 @@ const Login = () => {
   return (
     <section className="lg:pt-6 flex py-[60px] items-center bg-cool">
       <Helmet>
-        <title>Travellors | Login</title>
+        <title>TB | Login</title>
       </Helmet>
       <div className="flex justify-center w-[90%]  md:w-fit  mx-auto bg-base-100 items-center mt-6  rounded-xl">
         <div className="flex flex-col justify-center text-center rounded-sm w-full  md:w-[400px]  lg:text-left p-0 flex-1">
