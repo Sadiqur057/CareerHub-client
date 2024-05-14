@@ -7,6 +7,7 @@ import "react-toastify/dist/ReactToastify.css";
 import { Helmet } from "react-helmet-async";
 import { VscEye, VscEyeClosed } from "react-icons/vsc";
 import { Input } from "@material-tailwind/react";
+import authImg from "../../assets/images/auth.png"
 
 const Register = () => {
   const { createUser, updateUserProfile, setReload } = useContext(AuthContext);
@@ -33,16 +34,6 @@ const Register = () => {
     createUser(email, password).then(() => {
       toast.success("Account created succesfully");
 
-      // fetch("https://travelors-server.vercel.app/users", {
-      //   method: "POST",
-      //   headers: {
-      //     "content-type": "application/json",
-      //   },
-      //   body: JSON.stringify(userDetails),
-      // })
-      //   .then((res) => res.json())
-      //   .then();
-
       updateUserProfile(name, photo)
         .then(() => {
           setReload(true);
@@ -55,13 +46,16 @@ const Register = () => {
   };
 
   return (
-    <section className=" lg:pt-6 flex py-[60px] items-center bg-cool">
+    <section className=" lg:pt-6 flex py-[60px] items-center bg-cool lg:px-10">
       <Helmet>
-        <title>Travellors | Register</title>
+        <title>CH | Register</title>
       </Helmet>
       <div className="flex justify-center w-[90%]  md:w-fit  mx-auto bg-base-100 items-center mt-6  rounded-xl">
-        <div className="flex flex-col justify-center text-center rounded-sm w-full  md:w-[400px]  lg:text-left p-0 flex-1">
-          <div className="m-0 p-4 md:p-8 space-y-3 rounded-sm mx-auto lg:w-full lg:max-w-[400px] w-[93%] py-7 md:py-10">
+      <div className="grid lg:grid-cols-2  justify-center w-[90%]   md:w-fit mx-auto bg-base-100 items-center mt-6  rounded-xl ">
+        <div className="hidden lg:block w-full">
+          <img src={authImg} className="w-full max-h-[410px]" alt="" />
+        </div>
+          <div className="m-0 p-0 md:p-10 space-y-3 rounded-sm mx-auto lg:w-full md:w-[400px] md:max-w-[400px] w-[93%] py-7 md:py-10">
             <h1 className="text-3xl font-bold text-center pb-4">
               Register Here
             </h1>
@@ -69,11 +63,12 @@ const Register = () => {
               <div className="flex flex-col">
                 <div className="relative w-full min-w-[200px] h-10 mb-2">
                   <Input
+                    required
                     type="text"
                     autoComplete="current-name"
                     {...register("name", { required: "Name is required" })}
                     label="Name"
-                    color="teal"
+                    color="orange"
                   ></Input>
                 </div>
                 <p className="pb-2 text-left text-red-500">
@@ -82,9 +77,10 @@ const Register = () => {
                 <div className="relative w-full min-w-[200px] h-10 mb-2">
                   <Input
                     type="email"
+                    required
                     autoComplete="current-email"
                     {...register("email", { required: "Email is required" })}
-                    color="teal"
+                    color="orange"
                     label="Email"
                   />
                 </div>
@@ -94,10 +90,11 @@ const Register = () => {
                 {/* // photo */}
                 <div className="relative w-full min-w-[200px] h-10 mb-2">
                   <Input
+                    required
                     autoComplete="current-photo"
                     type="text"
                     label="Photo URL"
-                    color="teal"
+                    color="orange"
                     {...register("photo", {
                       required: "Photo URL is required",
                     })}
@@ -108,10 +105,11 @@ const Register = () => {
                 </p>
                 <div className="mt-1 relative w-full min-w-[200px] h-10">
                   <Input
+                    required
                     type={showPassword ? "text" : "password"}
                     autoComplete="current-password"
                     label="Password"
-                    color="teal"
+                    color="orange"
                     {...register("password", {
                       required: "Password is Required",
                       pattern: {

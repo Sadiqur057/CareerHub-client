@@ -8,6 +8,7 @@ import { Helmet } from "react-helmet-async";
 import { VscEye, VscEyeClosed } from "react-icons/vsc";
 import { FaGithub, FaGoogle } from "react-icons/fa6";
 import { Input } from "@material-tailwind/react";
+import authImg from "../../assets/images/auth.png"
 
 const Login = () => {
   // scroll to top on load
@@ -80,22 +81,27 @@ const Login = () => {
   };
 
   return (
-    <section className="lg:pt-6 flex py-[60px] items-center bg-cool">
+    <section className="lg:pt-6 flex py-[60px] items-center bg-cool lg:px-10">
       <Helmet>
-        <title>TB | Login</title>
+        <title>CH | Login</title>
       </Helmet>
       <div className="flex justify-center w-[90%]  md:w-fit  mx-auto bg-base-100 items-center mt-6  rounded-xl">
-        <div className="flex flex-col justify-center text-center rounded-sm w-full  md:w-[400px]  lg:text-left p-0 flex-1">
-          <div className="m-0 p-4 md:p-8 space-y-3 rounded-sm mx-auto lg:w-full lg:max-w-[400px] w-[93%] py-7 md:py-10">
+      <div className="grid lg:grid-cols-2  justify-center w-[90%]   md:w-fit mx-auto bg-base-100 items-center mt-6  rounded-xl ">
+        <div className="hidden lg:block w-full">
+          <img src={authImg} className="w-full max-h-[410px]" alt="" />
+        </div>
+        <div className="m-0 p-0 md:px-2 lg:px-10 space-y-3 rounded-sm mx-auto lg:w-full md:w-[400px] md:max-w-[400px] w-[93%] ">
+          <div className="m-0 md:px-8 lg:px-0 space-y-3 rounded-sm mx-auto lg:w-full lg:max-w-[400px] py-7 md:py-10">
             <h1 className="text-3xl font-bold text-center pb-4">Login Here</h1>
             <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
               <div className="flex flex-col">
                 <div className="relative w-full min-w-[200px] h-10 mb-2">
                   <Input
+                  required
                     type="email"
                     autoComplete="current-email"
                     {...register("email", { required: "Email is required" })}
-                    color="teal"
+                    color="orange"
                     label="Email"
                   />
                 </div>
@@ -104,13 +110,14 @@ const Login = () => {
                 </p>
                 <div className="mt-1 relative w-full min-w-[200px] h-10">
                   <Input
+                  required
                     type={showPassword ? "text" : "password"}
                     autoComplete="current-password"
                     {...register("password", {
                       required: "Password is required",
                     })}
                     label="Password"
-                    color="teal"
+                    color="orange"
                   />
                   <p
                     onClick={handleViewPassword}
@@ -167,6 +174,7 @@ const Login = () => {
             </p>
           </div>
         </div>
+      </div>
       </div>
     </section>
   );
