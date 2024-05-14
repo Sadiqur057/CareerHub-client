@@ -92,7 +92,7 @@ const Testimonials = () => {
                       <div className="md:ms-6">
                         <p
                           className="mb-6 font-light text-neutral-500 dark:text-neutral-300 text-sm md:text-base">
-                          {data.review.slice(0,100)}
+                          {data.review}
                         </p>
                         <p
                           className="mb-2 text-xl font-semibold text-neutral-800 dark:text-neutral-200">
