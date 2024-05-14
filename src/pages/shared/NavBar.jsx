@@ -42,7 +42,7 @@ export function NavBar() {
     });
   };
 
-  
+
   const activeStyles =
     "lg:border-y transition duration-300 ease-in-out px-2 border-c-primary font-bold hover:bg-c-primary hover:text-[#fff] text-[15px] my-2 lg:my-0 mx-0 hover:rounded py-2";
   const inactiveStyles =
@@ -61,6 +61,14 @@ export function NavBar() {
         className={({ isActive }) => (isActive ? activeStyles : inactiveStyles)}
       >
         All Jobs
+      </NavLink>
+      <NavLink
+        to="/blogs"
+        className={({ isActive }) =>
+          isActive ? activeStyles : inactiveStyles
+        }
+      >
+        Blogs
       </NavLink>
 
       {user && (
@@ -89,14 +97,6 @@ export function NavBar() {
           >
             My Jobs
           </NavLink>
-          <NavLink
-            to="/blogs"
-            className={({ isActive }) =>
-              isActive ? activeStyles : inactiveStyles
-            }
-          >
-            Blogs
-          </NavLink>
         </>
       )}
     </>
@@ -123,8 +123,9 @@ export function NavBar() {
     <div className="max-h-[768px] w-full overflow-hidden border-0 outline-none">
       <Navbar className={theme === "light" ? lightNav : darkNav}>
         <div className="flex items-center justify-between h-[40px] md:h-[50px] px-2 xl:px-10">
-          <Typography className="text-c-primary mr-4 cursor-pointer font-bold text-2xl md:text-3xl ">
-            <Link to="/">FoodShare</Link>
+          <Typography className="text-c-primary mr-4 cursor-pointer font-bold text-2xl md:text-3xl flex items-center gap-2">
+            <img className="w-7 h-7" src="/logo.png" alt="" />
+            <Link to="/">CareerHub</Link>
           </Typography>
           <div className="flex items-center gap-3">
             <div className="hidden lg:block">{navList}</div>
@@ -145,7 +146,7 @@ export function NavBar() {
             <div className="flex items-center gap-x-1">
               {user && (
                 <>
-                  <div id="user" className="btn-circle avatar flex items-center justify-center">
+                  <div id="user" className="btn-circle avatar  items-center justify-center hidden sm:flex">
                     <div className="w-full max-w-[40px] max-h-[40px] rounded-full">
                       <img
                         className="w-full h-full"
@@ -165,7 +166,7 @@ export function NavBar() {
                   Logout
                 </button>
               ) : loading ? (
-                <Spinner className="h-8 w-8" color="teal" />
+                <Spinner className="h-8 w-8" color="orange" />
               ) : (
                 <>
                   {" "}
@@ -236,7 +237,7 @@ export function NavBar() {
                 Logout
               </button>
             ) : loading ? (
-              <Spinner className="h-8 w-8" color="teal" />
+              <Spinner className="h-8 w-8" color="orange" />
             ) : (
               <>
                 {" "}
