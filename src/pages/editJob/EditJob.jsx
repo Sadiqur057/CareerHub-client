@@ -1,4 +1,4 @@
-import { useLoaderData, useNavigate, useParams } from "react-router-dom";
+import {  useNavigate, useParams } from "react-router-dom";
 import { Select, Option, Input, Textarea, Spinner } from "@material-tailwind/react";
 import Swal from "sweetalert2";
 import { Helmet } from "react-helmet-async";
@@ -9,7 +9,7 @@ import DatePicker from "react-datepicker"
 import "react-datepicker/dist/react-datepicker.css";
 import axios from "axios";
 import useAxiosSecure from "../../hooks/useAxiosSecure";
-import { useMutation, useQuery } from "@tanstack/react-query";
+import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 
 const EditJob = () => {
 
@@ -29,36 +29,32 @@ const EditJob = () => {
     { label: "Part Time", value: "part-time" }
   ];
 
-  const { isPending, data: jobInformation, refetch } = useQuery({
-    queryKey: ['job-details'],
+  const { isPending, data: jobInformation } = useQuery({
+    queryKey: ['job-details',{id:id}],
     queryFn: async () => {
-      const response = await axiosSecure.get(`http://localhost:5000/job-details?email=${user?.email}&id=${id}`)
-
+      const response = await axiosSecure.get(`https://career-hub-server-one.vercel.app/job-details?email=${user?.email}&id=${id}`)
       setCategoryValue(response.data?.job_type)
       setDeadline(response.data?.deadline)
-      console.log(response.data)
       const data = response.data;
-      console.log(data)
       return data;
     }
   })
 
 
-
-
-
   const handleCategoryOptions = (value) => {
-    setCategoryValue(value.toLocaleDateString());
+    setCategoryValue(value);
   };
 
+  const queryClient = useQueryClient();
   
   const {mutate} = useMutation({
+    onSuccess: ()=>{
+      queryClient.invalidateQueries(['job-details',{id:id}]);
+    },
     mutationFn: (jobDetails) =>{
-          axios.put(`http://localhost:5000/edit-job/${jobInformation?._id}`,jobDetails)
+          axios.put(`https://career-hub-server-one.vercel.app/edit-job/${jobInformation?._id}`,jobDetails)
             .then(res => {
-              console.log(res.data)
               if(res.data.modifiedCount>0){
-                refetch()
                 Swal.fire({
                   title: "Success!",
                   text: "You have Edited the Job",
@@ -80,6 +76,7 @@ const EditJob = () => {
             })
         }
   })
+  
 
 
   
@@ -90,12 +87,12 @@ const EditJob = () => {
   if (isPending) {
     return (
       <div className="min-h-[calc(100vh-80px)] w-full flex justify-center items-center">
-        <Spinner className="h-12 w-12" color="teal" />
+        <Spinner className="h-12 w-12" color="orange" />
       </div>
     );
   }
 
-  const { applicants_number, deadline, job_title, posted_by, posting_date, salary_range, _id,description, image } = jobInformation;
+  const {  job_title, salary_range,description, image } = jobInformation;
 
   const handleEditJob = (e) => {
     e.preventDefault();
@@ -118,24 +115,31 @@ const EditJob = () => {
       job_type,
       deadline
     };
-    console.log(jobDetails)
     triggerMutation(jobDetails)
+    e.target.salary.value = ""
+    e.target.jobTitle.value = ""
+    e.target.description.value = ""
+    e.target.image.value = ""
+    setCategoryValue('');
+    setDeadline('')
+
   }
+
 
   return (
     <div className="bg-cool py-10">
       <Helmet>
-        <title>CH | Add Job</title>
+        <title>CH | Update Job Information</title>
       </Helmet>
-      <section className="p-6 bg-base-100 w-[90%] max-w-4xl mx-auto rounded-md bg-cool">
+      <section className="bg-base-100 w-[90%] max-w-4xl mx-auto rounded-md bg-cool">
         <form
           onSubmit={handleEditJob}
-          className="container flex flex-col mx-auto space-y-12 bg-base-100 rounded-xl px-10 pb-5"
+          className="container flex flex-col mx-auto space-y-12 bg-base-100 rounded-xl px-4 md:px-10 pb-5"
         >
           <fieldset className=" gap-6 rounded-md p-2 md:p-6 lg:p-10">
             <div className="space-y-2 col-span-full lg:col-span-1">
               <p className="text-center font-bold text-2xl md:text-3xl py-8">
-                Add Job
+                Update Job Information
               </p>
             </div>
             <div className="grid grid-cols-6 gap-4 col-span-full ">
@@ -217,7 +221,7 @@ const EditJob = () => {
               <div className="col-span-full">
                 <input
                   type="submit"
-                  value="Add"
+                  value="Update"
                   className="bg-c-primary hover:bg-c-hover btn btn-neutral border-none text-white w-full"
                 />
               </div>
