@@ -5,6 +5,7 @@ import useAxiosSecure from "../../hooks/useAxiosSecure";
 import { Option, Select, Spinner } from "@material-tailwind/react";
 import { useQuery } from "@tanstack/react-query";
 import PdfContainer from "./PdfContainer";
+import { Helmet } from "react-helmet-async";
 
 
 const AppliedJobs = () => {
@@ -29,7 +30,7 @@ const AppliedJobs = () => {
   if (isPending) {
     return (
       <div className="min-h-[calc(100vh-80px)] w-full flex justify-center items-center ">
-        <Spinner className="h-12 w-12" color="teal" />
+        <Spinner className="h-12 w-12" color="orange" />
       </div>
     );
   }
@@ -57,7 +58,10 @@ const AppliedJobs = () => {
 
   return (
     <div className="w-[90%] mx-auto my-8">
-      <div className="w-fit mx-auto mb-4 md:mb-8 flex justify-center gap-4">
+            <Helmet>
+        <title>CH | Applied Jobs</title>
+      </Helmet>
+      <div className="w-fit mx-auto mb-4 md:mb-8 flex flex-col sm:flex-row justify-center gap-4">
         <Select
           label="Select Job Category"
           color="orange"

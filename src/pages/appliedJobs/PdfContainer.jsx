@@ -12,7 +12,7 @@ const PdfContainer = ({displayData}) => {
   return (
     <PDFDownloadLink document={<PdfComponent displayData={displayData} />} fileName="document.pdf">
       {({ blob, url, loading, error }) =>
-        loading ? 'Loading document...' : 'Download PDF'
+        loading ? 'Loading document...' : 'Download Summary'
       }
     </PDFDownloadLink>
   );
