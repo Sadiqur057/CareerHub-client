@@ -1,13 +1,21 @@
+import { Helmet } from "react-helmet-async";
 import Banner from "./Banner";
 import JobByCategory from "./JobByCategory";
-import MyComponent from "./test";
+import { JobFind } from "./JobFind";
+import { QuickService } from "./QuickService";
+import Testimonials from "./Testimonials";
 
 const Home = () => {
   return (
     <div>
+      <Helmet>
+        <title>CH | Home</title>
+      </Helmet>
       <Banner></Banner> 
       <JobByCategory></JobByCategory>
-      {/* <MyComponent></MyComponent>   */}
+      <JobFind></JobFind>
+      <Testimonials></Testimonials>
+      <QuickService></QuickService>
     </div>
   );
 };
