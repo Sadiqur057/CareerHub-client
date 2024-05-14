@@ -7,6 +7,7 @@ import useAuth from "../../hooks/useAuth";
 import { useQuery } from "@tanstack/react-query";
 import { Spinner } from "@material-tailwind/react";
 import useAxiosSecure from "../../hooks/useAxiosSecure";
+import { Helmet } from "react-helmet-async";
 
 const MyJobs = () => {
 
@@ -16,14 +17,14 @@ const MyJobs = () => {
   const { isPending, data: myJobs, refetch } = useQuery({
     queryKey: ['my-foods'],
     queryFn: async () => {
-      const response = await axiosSecure.get(`http://localhost:5000/my-jobs/${user?.email}`)
+      const response = await axiosSecure.get(`https://career-hub-server-one.vercel.app/my-jobs/${user?.email}`)
       return response.data
     }
   })
   if (isPending) {
     return (
       <div className="min-h-[calc(100vh-80px)] w-full flex justify-center items-center">
-        <Spinner className="h-12 w-12" color="teal" />
+        <Spinner className="h-12 w-12" color="orange" />
       </div>
     );
   }
@@ -40,9 +41,8 @@ const MyJobs = () => {
       confirmButtonText: "Yes, delete it!"
     }).then((result) => {
       if (result.isConfirmed) {
-        axios.delete(`http://localhost:5000/delete-job/${id}`)
+        axios.delete(`https://career-hub-server-one.vercel.app/delete-job/${id}`)
           .then(data => {
-            console.log(data.data)
             if (data.data.deletedCount > 0) {
               refetch();
               Swal.fire({
@@ -57,17 +57,18 @@ const MyJobs = () => {
 
   }
   return (
-    <div className="w-[90%] mx-auto">
+    <div className="w-[90%] mx-auto my-10">
+      <Helmet>
+        <title>CH | My Jobs</title>
+      </Helmet>
 
-      <div className="flex justify-end gap-2 my-6">
-        <input type="text" placeholder="Search" className="border-c-primary border outline-c-primary  px-4 rounded-xl" />
-        <input type="submit" className="py-2 px-4 bg-c-primary rounded-lg text-white font-medium" value="submit" />
-      </div>
       <div className="mb-10 overflow-auto">
         <table className="table">
           <thead className="bg-gray-100">
             <tr className="text-gray-800">
               <th>Title</th>
+              <th>Salary</th>
+              <th>Job Type</th>
               <th>Posting Date</th>
               <th>Deadline</th>
               <th>Actions</th>
@@ -77,6 +78,8 @@ const MyJobs = () => {
             {
               myJobs.map((job) => <tr key={job._id}>
                 <td>{job?.job_title}</td>
+                <td>{job?.salary_range}</td>
+                <td>{job?.job_type}</td>
                 <td>{job?.posting_date}</td>
                 <td>{job?.deadline}</td>
                 <td className="flex items-center gap-4"><Link to={`/edit-job/${job._id}`}>
