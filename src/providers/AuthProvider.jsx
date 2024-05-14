@@ -59,16 +59,14 @@ const AuthProvider = ({ children }) => {
       setUser(currentUser);
       setReload(false)
       if (currentUser) {
-        axios.post('http://localhost:5000/jwt', loggedUser, { withCredentials: true })
-          .then(res => {
-            console.log("token response", res.data)
+        axios.post('https://career-hub-server-one.vercel.app/jwt', loggedUser, { withCredentials: true })
+          .then(() => {
           })
       } else {
-        axios.post('http://localhost:5000/logout', loggedUser, {
+        axios.post('https://career-hub-server-one.vercel.app/logout', loggedUser, {
           withCredentials: true
         })
-          .then(res => {
-            console.log(res.data)
+          .then(() => {
           })
       }
     });
