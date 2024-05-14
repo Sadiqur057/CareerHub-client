@@ -32,9 +32,8 @@ const AddJob = () => {
 
   const {mutate} = useMutation({
     mutationFn: (jobDetails) =>{
-      axios.post("http://localhost:5000/add-job", jobDetails)
+      axios.post("https://career-hub-server-one.vercel.app/add-job", jobDetails)
       .then(res=> {
-        console.log(res.data)
         if(res.data.insertedId){
           Swal.fire({
             title: "Success!",
@@ -79,9 +78,20 @@ const AddJob = () => {
       applicants_number,
       posting_date
     };
-    console.log(jobDetails)
     triggerMutation(jobDetails)
+    clearInputField(form.salary)
+    clearInputField(form.jobTitle)
+    clearInputField(form.description)
+    clearInputField(form.image)
+    setCategoryValue('');
+    setDeadline('')
   };
+
+
+  const clearInputField =(field)=>{
+    field.value = "";
+  }
+
 
 
   return (
@@ -89,10 +99,10 @@ const AddJob = () => {
       <Helmet>
         <title>CH | Add Job</title>
       </Helmet>
-      <section className="p-6 bg-base-100 w-[90%] max-w-4xl mx-auto rounded-md bg-cool">
+      <section className="py-6 bg-base-100 w-[90%] max-w-4xl mx-auto rounded-md bg-cool">
         <form
           onSubmit={handleAddJob}
-          className="container flex flex-col mx-auto space-y-12 bg-base-100 rounded-xl px-10 pb-5"
+          className="container flex flex-col mx-auto space-y-12 bg-base-100 rounded-xl px-4ee md:px-10 pb-5"
         >
           <fieldset className=" gap-6 rounded-md p-2 md:p-6 lg:p-10">
             <div className="space-y-2 col-span-full lg:col-span-1">
