@@ -62,7 +62,8 @@ const AuthProvider = ({ children }) => {
         axios.post('https://career-hub-server-one.vercel.app/jwt', loggedUser, { withCredentials: true })
           .then(() => {
           })
-      } else {
+      }
+       else {
         axios.post('https://career-hub-server-one.vercel.app/logout', loggedUser, {
           withCredentials: true
         })
@@ -83,6 +84,7 @@ const AuthProvider = ({ children }) => {
     googleLogin,
     githubLogin,
     setReload,
+    setUser,
   };
   return (
     <AuthContext.Provider value={AuthInfo}>{children}</AuthContext.Provider>
