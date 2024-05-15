@@ -6,10 +6,10 @@ const Footer = () => {
       <div className="w-[90%] pt-16 mx-auto">
         <div className="grid row-gap-10 mb-8 lg:grid-cols-6">
           <div className="grid grid-cols-2 gap-5 row-gap-8 lg:col-span-4 md:grid-cols-4">
-            <div className="col-span-2 flex flex-col justify-center mb-3 md:mb-0">
+            <div className="col-span-2 flex flex-col justify-center mb-3 gap-3">
               <div className="flex gap-2 items-center text-[#d6602a]">
-              <img src="/logo.png" className="w-6 h-6 md:w-7 md:h-7" alt="" />
-              <h2 className="text-2xl md:text-3xl font-semibold  mb-2">CareerHub</h2>
+                <img src="/logo.png" className="w-6 h-6 md:w-7 md:h-7" alt="" />
+                <h2 className="text-2xl md:text-3xl font-semibold self-center">CareerHub</h2>
               </div>
               <p className="text-gray-500">CareerHub is your go-to destination for finding your next job</p>
             </div>
