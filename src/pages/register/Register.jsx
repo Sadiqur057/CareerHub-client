@@ -10,7 +10,7 @@ import { Input } from "@material-tailwind/react";
 import authImg from "../../assets/images/auth.png"
 
 const Register = () => {
-  const { createUser, updateUserProfile, setReload } = useContext(AuthContext);
+  const { createUser, updateUserProfile, setReload, setUser } = useContext(AuthContext);
   const navigate = useNavigate();
   const [showPassword, setShowPassword] = useState(false);
   const handleViewPassword = () => {
@@ -31,9 +31,9 @@ const Register = () => {
     const name = data.name;
     const photo = data.photo;
     // const userDetails = { email, name, photo };
-    createUser(email, password).then(() => {
+    createUser(email, password).then((user) => {
       toast.success("Account created succesfully");
-
+      setUser(user)
       updateUserProfile(name, photo)
         .then(() => {
           setReload(true);

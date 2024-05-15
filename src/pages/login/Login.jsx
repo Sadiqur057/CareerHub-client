@@ -25,7 +25,7 @@ const Login = () => {
     setShowPassword(!showPassword);
   };
 
-  const { loginUser, googleLogin, githubLogin, setReload } = useContext(AuthContext);
+  const { loginUser, googleLogin, githubLogin, setReload, setUser } = useContext(AuthContext);
 
   const {
     register,
@@ -35,7 +35,8 @@ const Login = () => {
 
   const handleGoogleLogin = () => {
     googleLogin()
-      .then(() => {
+      .then((user) => {
+        setUser(user)
         setReload(true)
         toast.success("Login Success");
         navigate(location?.state ? location.state : "/");
@@ -48,8 +49,9 @@ const Login = () => {
 
   const handleGithubLogin = () => {
     githubLogin()
-      .then(() => {
+      .then((user) => {
         toast.success("Login Success");
+        setUser(user)
         setReload(true)
 
         toast.success("Login Success");
@@ -66,7 +68,9 @@ const Login = () => {
     const email = data.email;
     const password = data.password;
     loginUser(email, password)
-      .then(() => {
+      .then((user) => {
+        setReload(true)
+        setUser(user)
         toast.success("Login Success");
         navigate(location?.state ? location.state : "/");
       })
