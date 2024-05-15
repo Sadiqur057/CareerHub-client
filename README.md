@@ -12,8 +12,9 @@ CareerHub is a website that helps people find jobs easily, contain different typ
 - React v18.2.0
 - React DOM v18.2.0
 - Framer-motion v11.1.9
-- tanstack/react-query v5.35.5
-- axios v1.6.8
+- React Datepicker v6.9.0
+- Tanstack/react-query v5.35.5
+- Axios v1.6.8
 - React Hook Form v7.51.2
 - React Tabs v6.0.2
 - React To PDF v1.0.1
