@@ -18,7 +18,7 @@ import { Helmet } from "react-helmet-async";
 const JobDetails = () => {
 
 
-  const { user } = useAuth()
+  const { user, loading } = useAuth()
   window.scrollTo(0, 0);
 
   const [open, setOpen] = React.useState(false);
@@ -32,7 +32,8 @@ const JobDetails = () => {
   const { isPending, data: jobInformation } = useQuery({
     queryKey: ['job-details'],
     queryFn: async () => {
-      const email = user?.email
+      const email = await user.email
+      console.log(email)
       const response = await axiosSecure.get(`https://career-hub-server-one.vercel.app/job-details?email=${email}&id=${id}`)
       return response.data
     }
@@ -72,7 +73,7 @@ const JobDetails = () => {
 
 
 
-  if (isPending) {
+  if (isPending || loading) {
     return (
       <div className="min-h-[calc(100vh-80px)] w-full flex justify-center items-center">
         <Spinner className="h-12 w-12" color="orange" />
@@ -122,7 +123,7 @@ const JobDetails = () => {
       <Helmet>
         <title>CH | Job: {job_title}</title>
       </Helmet>
-      <img className="relative z-10 object-cover object-center w-full mx-auto h-[30vh] md:h-[60vh] lg:h-[80vh]" src={image} alt="" />
+      <img className="relative z-10 object-cover object-center w-full mx-auto h-[30vh] max-h-[700px] md:h-[60vh] lg:h-[80vh]" src={image} alt="" />
 
       <div className="relative z-20 max-w-3xl xl:max-w-4xl p-6 mx-auto lg:-mt-56 bg-base-200 lg:rounded-md shadow  mb-10">
         <a href="#" className="font-semibold  hover:underline md:text-2xl">
